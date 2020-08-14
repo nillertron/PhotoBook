@@ -1,0 +1,28 @@
+﻿@page "/"
+@inject IBrugerService brugerService
+@inject NavigationManager nav
+<div class="text-center justify-content-center">
+    <p class="text-danger">@msg</p>
+    <p>Enter id for photoalbum</p>
+    <input @bind="@id" type="text" style="display:inline; height:3rem; text-size-adjust:auto" />
+    <button style="display:inline; height:3rem" @onclick="Search" class="btn btn-primary">Search</button>
+</div>
+@code  {
+    private string id = string.Empty;
+    private string msg = string.Empty;
+
+    private async Task Search()
+    {
+        try
+        {
+            var bruger = await brugerService.FindUserFromSharedId(id);
+            nav.NavigateTo("/Fotoalbum/"+bruger.SharedId);
+
+        }
+        catch(Exception ex)
+        {
+            msg = ex.Message;
+        }
+    }
+}
+

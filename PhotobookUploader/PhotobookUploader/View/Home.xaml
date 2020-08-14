@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="PhotobookUploader.View.Home">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid VerticalOptions="CenterAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+
+                </Grid.RowDefinitions>
+                <Button Command="{Binding PicturePageCommand}" Text="Upload Picture"></Button>
+                <Button Command="{Binding CreatePhotoalbumCommand}" Grid.Column="1" Text="Create Photoalbum"></Button>
+                <Button Command="{Binding SettingsPageCommand}" Grid.Column="0" Grid.Row="1" Text="Profile Settings"></Button>
+                <Button Command="{Binding LogoutCommand}" Grid.ColumnSpan="2" Grid.Row="2" BackgroundColor="IndianRed" Text="Log Out"></Button>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

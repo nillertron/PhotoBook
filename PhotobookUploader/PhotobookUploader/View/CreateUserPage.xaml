@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="PhotobookUploader.View.CreateUserPage">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="CenterAndExpand">
+            <Label Text="{Binding Msg}"></Label>
+            <Entry Placeholder="Name" Text="{Binding Model.Navn}"></Entry>
+            <Entry Placeholder="Surname" Text="{Binding Model.EfterNavn}"></Entry>
+            <Entry Placeholder="E-Mail" Text="{Binding Model.Email}"></Entry>
+            <Entry IsPassword="True" Placeholder="Password" Text="{Binding Model.Password}"></Entry>
+            <Entry Placeholder="Share Id" Text="{Binding Model.SharedId}"></Entry>
+            <Label Text="This is a unique id to share with family and friends to view your photos"></Label>
+            <Button Text="Create" Command="{Binding CreateCommand}"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
