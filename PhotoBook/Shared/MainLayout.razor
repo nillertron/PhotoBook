@@ -1,9 +1,15 @@
 ﻿@inherits LayoutComponentBase
-<div class="main">
-    <div class="top-row px-4">
+    <div class="container-fluid">
+        <div class="row" style="background-color:#fdebd2; height:7rem">
+            <div class="col-12 text-center my-auto">
+                <PhotoBook.Pages.Search></PhotoBook.Pages.Search>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12" style="height: 100%; width: 100%">
+                    @Body
+
+            </div>
+        </div>
     </div>
 
-    <div class="content px-4">
-        @Body
-    </div>
-</div>

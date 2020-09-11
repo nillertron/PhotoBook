@@ -15,14 +15,16 @@ namespace PhotobookUploader.ViewModel
         private PB_Bruger _model = new PB_Bruger();
         public PB_Bruger Model { get => _model; set { _model = value; Notify("Model"); } }
         public ICommand CreateCommand { get; private set; }
+        public ICommand BackCommand { get; private set; }
         private string _msg;
         public string Msg { get => _msg; set { _msg = value; Notify("Msg"); } }
         public CreateUserViewModel(IServiceProvider container, IBrugerService service):base(container)
         {
             this.service = service;
             CreateCommand = new Command(async () => await TryCreate());
+            BackCommand = new Command(async () => await Back());
         }
-        public async Task TryCreate()
+        private async Task TryCreate()
         {
             try
             {
@@ -36,6 +38,12 @@ namespace PhotobookUploader.ViewModel
             {
                 Msg = ex.Message;
             }
+        }
+        private async Task Back()
+        {
+            var loginPage = Container.GetService(typeof(View.LoginPage));
+            Application.Current.MainPage = (Page)loginPage;
+            
         }
 
 

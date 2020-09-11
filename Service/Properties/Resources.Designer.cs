@@ -61,7 +61,7 @@ namespace Service.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to datasource=mysql41.unoeuro.com;port=3306;username=nillertron_com;password=n1chl45ersej;database=nillertron_com_db;.
         /// </summary>
         internal static string DefaultConnection {
             get {

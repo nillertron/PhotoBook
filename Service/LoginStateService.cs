@@ -50,5 +50,18 @@ namespace Service
             }
 
         }
+
+        public async Task EditUser(PB_Bruger model)
+        {
+            var rq = new RestRequest("api/User/Edit", Method.POST);
+            var s = JsonConvert.SerializeObject(model);
+            rq.AddParameter("application/json; charset=utf-8", s, ParameterType.RequestBody);
+            var response = await client.Client.ExecuteAsync(rq);
+            var result = JsonConvert.DeserializeObject<string>(response.Content);
+            if (result != "Ok")
+            {
+                throw new Exception(result);
+            }
+        }
     }
 }

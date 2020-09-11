@@ -1,0 +1,30 @@
+﻿@inject IBrugerService brugerService
+@inject ITokenService tokenService
+@inject NavigationManager nav
+    <div class="align-items-center" style="vertical-align:middle">
+        <input @bind="@id" placeholder="Enter id for photoalbum" type="text" style="display:inline; line-height:30px" />
+        <button style="display:inline; " @onclick="search" class="btn btn-primary">Search</button>
+        <p class="text-danger" style="display:inline">@msg</p>
+
+    </div>
+@code  {
+    private string id = string.Empty;
+    private string msg = string.Empty;
+
+    private async Task search()
+    {
+        try
+        {
+            msg = string.Empty;
+            var bruger = await brugerService.FindUserFromSharedId(id);
+            var token = new Model.PB_Token { Bruger = bruger, ExpirationDate =DateTime.Now.AddDays(1), Token = Guid.NewGuid().ToString() };
+            await tokenService.CreateToken(token);
+            nav.NavigateTo("/Fotoalbum/" + bruger.SharedId + "/" + token.Token);
+
+        }
+        catch (Exception ex)
+        {
+            msg = ex.Message;
+        }
+    }
+}

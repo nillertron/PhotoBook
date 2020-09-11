@@ -1,7 +1,7 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: Verdana, Verdana, Arial, sans-serif;
 }
 
 a, .btn-link {
@@ -9,9 +9,23 @@ a, .btn-link {
 }
 
 .btn-primary {
-    color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
+    background-color: whitesmoke;
+    color: black;
+    border-color: black;
+    line-height: 20px;
+}
+.btn-primary:hover {
+    background-color: black !important;
+}
+.card-header {
+    background: Whitesmoke !important;
+    text-align: center;
+    font-size: 22px;
+    font-style: oblique;
+}
+.card-footer {
+    text-align: center;
+    background-color: Whitesmoke;
 }
 
 app {

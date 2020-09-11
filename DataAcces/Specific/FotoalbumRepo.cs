@@ -17,5 +17,12 @@ namespace DataAcces.Specific
         {
             return dbContext.PB_FotoAlbum.Where(x => x.PB_BrugerId == id).ToList();
         }
+        public async Task<List<PB_Foto>> GetUserFotosFromAlbumid(int id)
+        {
+            var list = dbContext.PB_Foto.Where(x => x.PB_FotoalbumId == id).ToList();
+            return list;
+
+        }
+
     }
 }

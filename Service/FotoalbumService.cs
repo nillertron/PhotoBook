@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using DataAcces.Specific;
+using Model;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
@@ -12,10 +13,12 @@ namespace Service
     {
         private IRestClient client;
         private ILoginStateService state;
-        public FotoalbumService(IRestClient c, ILoginStateService state)
+        private FotoalbumRepo repo;
+        public FotoalbumService(IRestClient c, ILoginStateService state, FotoalbumRepo repo)
         {
             client = c;
             this.state = state;
+            this.repo = repo;
         }
         public async Task<PB_Fotoalbum> GetApi(int photoAlbumId)
         {
@@ -36,7 +39,7 @@ namespace Service
             var serialiseret = JsonConvert.SerializeObject(model);
             request.AddParameter("application/json; charset=utf-8", serialiseret, ParameterType.RequestBody);
             var response = await client.Client.ExecuteAsync(request);
-            if(response.StatusCode != System.Net.HttpStatusCode.OK)
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 throw new Exception("Something went wrong");
             }
@@ -48,6 +51,10 @@ namespace Service
         public async Task DeleteApi(PB_Fotoalbum model)
         {
 
+        }
+        public async Task<List<PB_Foto>> GetFotoAlbum(int id)
+        {
+            return await repo.GetUserFotosFromAlbumid(id);
         }
     }
 }

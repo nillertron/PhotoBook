@@ -16,12 +16,20 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+
 
                 </Grid.RowDefinitions>
                 <Button Command="{Binding PicturePageCommand}" Text="Upload Picture"></Button>
-                <Button Command="{Binding CreatePhotoalbumCommand}" Grid.Column="1" Text="Create Photoalbum"></Button>
-                <Button Command="{Binding SettingsPageCommand}" Grid.Column="0" Grid.Row="1" Text="Profile Settings"></Button>
-                <Button Command="{Binding LogoutCommand}" Grid.ColumnSpan="2" Grid.Row="2" BackgroundColor="IndianRed" Text="Log Out"></Button>
+                <Button Command="{Binding VideoPageCommand}" Grid.Column="1" Text="Upload Video"></Button>
+                <Button Command="{Binding ManageFotoCommand}" Grid.Row="1" Text="Manage Pictures"></Button>
+                <Button Command="{Binding ManageVideoCommand}" Grid.Column="1" Grid.Row="1" Text="Manage Videos"></Button>
+                <Button Command="{Binding CreatePhotoalbumCommand}" Grid.ColumnSpan="2" Grid.Row="2" Grid.Column="0" Text="Create Photoalbum"></Button>
+                <Button Command="{Binding SettingsPageCommand}" BackgroundColor="DarkGray" Grid.ColumnSpan="2" Grid.Row="3" Text="Profile Settings"></Button>
+                <Button Command="{Binding LogoutCommand}" Grid.ColumnSpan="2" Grid.Row="4" BackgroundColor="IndianRed" Text="Log Out"></Button>
+
+
             </Grid>
         </StackLayout>
     </ContentPage.Content>

@@ -70,5 +70,36 @@ namespace PhotoBook.API
                 return ex.Message;
             }
         }
+        [HttpPost("Edit")]
+        public async Task<string> Edit([FromBody] PB_Foto model)
+        {
+            try
+            {
+                await repo.Edit(model);
+                return "Ok";
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
+        [HttpPost("Delete")]
+        public async Task<string> Delete([FromBody] PB_Foto model)
+        {
+            try
+            {
+                await repo.Delete(model);
+                var fileName = model.Url.Replace("http://photobook.nillertron.com/images/", "");
+                var fileLocation = Path.Combine(hosting.WebRootPath, "images", fileName);
+                System.IO.File.Delete(fileLocation);
+                return "Ok";
+
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
     }
 }

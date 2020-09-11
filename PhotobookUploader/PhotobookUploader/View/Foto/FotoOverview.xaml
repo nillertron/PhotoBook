@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:PhotobookUploader.Controls;assembly=PhotobookUploader"
+             x:Class="PhotobookUploader.View.FotoOverview">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="{Binding Msg}"></Label>
+            <ListView x:Name="ListView" ItemsSource="{Binding FotoListe}" RowHeight="500" SelectionMode="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <local:ItemCell SelectedBackgroundColor="Blue">
+                            <Grid x:Name="Item">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="5*"></RowDefinition>
+                                    <RowDefinition Height="0.5*"></RowDefinition>
+                                    <RowDefinition Height="0.5*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"  Source="{Binding Url}"></Image>
+                                <Label Grid.Row="1" HorizontalOptions="CenterAndExpand" Grid.ColumnSpan="2" Text="{Binding Beskrivelse}"></Label>
+                                <Button BindingContext="{Binding Source={x:Reference ListView}, Path=BindingContext}" Text="Edit" Grid.Row="2" Command="{Binding EditPageCommand}" CommandParameter="{Binding Source={x:Reference Item},Path=BindingContext}"></Button>
+                                 <Button BindingContext="{Binding Source={x:Reference ListView}, Path=BindingContext}"  Command="{Binding DeletePictureCommand}" CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" Text="Delete" Grid.Row="2" Grid.Column="1" BackgroundColor="IndianRed"></Button>
+
+                            </Grid>
+                        </local:ItemCell>
+                        
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

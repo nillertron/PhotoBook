@@ -11,7 +11,7 @@ namespace PhotobookUploader.Navigation
         private static NavigationPage navigation;
         public Navigation(Page init)
         {
-            navigation = new NavigationPage(init);
+            navigation = new NavigationPage(init) { BarBackgroundColor = Color.FromHex("#222222"), BarTextColor = Color.WhiteSmoke };
              App.Current.MainPage = navigation;
         }
         public static async Task PushAsync(Page p)

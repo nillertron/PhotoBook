@@ -55,7 +55,7 @@ namespace DataAcces.Migrations
                     b.Property<DateTime>("OprettetDato")
                         .HasColumnType("datetime");
 
-                    b.Property<int?>("PB_FotoalbumId")
+                    b.Property<int>("PB_FotoalbumId")
                         .HasColumnType("int");
 
                     b.Property<string>("Url")
@@ -83,7 +83,7 @@ namespace DataAcces.Migrations
                     b.Property<DateTime>("OprettetDato")
                         .HasColumnType("datetime");
 
-                    b.Property<int?>("PB_BrugerId")
+                    b.Property<int>("PB_BrugerId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -93,18 +93,85 @@ namespace DataAcces.Migrations
                     b.ToTable("PB_FotoAlbum");
                 });
 
+            modelBuilder.Entity("Model.PB_Token", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("BrugerId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ExpirationDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Token")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BrugerId");
+
+                    b.ToTable("PB_Token");
+                });
+
+            modelBuilder.Entity("Model.PB_Video", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Beskrivelse")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("OprettetDato")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("PB_FotoalbumId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PB_FotoalbumId");
+
+                    b.ToTable("PB_Video");
+                });
+
             modelBuilder.Entity("Model.PB_Foto", b =>
                 {
                     b.HasOne("Model.PB_Fotoalbum", null)
                         .WithMany("Fotos")
-                        .HasForeignKey("PB_FotoalbumId");
+                        .HasForeignKey("PB_FotoalbumId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Model.PB_Fotoalbum", b =>
                 {
                     b.HasOne("Model.PB_Bruger", null)
                         .WithMany("Fotoalbum")
-                        .HasForeignKey("PB_BrugerId");
+                        .HasForeignKey("PB_BrugerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Model.PB_Token", b =>
+                {
+                    b.HasOne("Model.PB_Bruger", "Bruger")
+                        .WithMany()
+                        .HasForeignKey("BrugerId");
+                });
+
+            modelBuilder.Entity("Model.PB_Video", b =>
+                {
+                    b.HasOne("Model.PB_Fotoalbum", null)
+                        .WithMany("Videos")
+                        .HasForeignKey("PB_FotoalbumId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

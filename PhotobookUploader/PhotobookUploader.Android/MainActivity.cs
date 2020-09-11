@@ -31,9 +31,10 @@ namespace PhotobookUploader.Droid
             services = ContainerService.AddDataAcces(services);
             services = AddViewModels(services);
             services = AddViews(services);
-            services.AddTransient<App>();
+            services.AddTransient(typeof(Service.Interface.IMobileFeature), typeof(AndroidSpecific.MobileFeature));
+            //services.AddTransient<App>();
             var provider = services.BuildServiceProvider();
-            LoadApplication(provider.GetRequiredService<App>());
+            LoadApplication(new App((LoginPage)provider.GetRequiredService(typeof(LoginPage)),(Home)provider.GetRequiredService(typeof(Home)),(ILoginStateService)provider.GetRequiredService(typeof(ILoginStateService))));
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
@@ -45,8 +46,8 @@ namespace PhotobookUploader.Droid
         private static IServiceCollection AddViewModels(IServiceCollection services)
         {
 
-            var viewmodelList = Assembly.Load(nameof(PhotobookUploader)).GetTypes().Where(x=>x.Namespace.Contains("ViewModel") && !x.IsNested).ToList();
-            
+            var viewmodelList = Assembly.Load(nameof(PhotobookUploader)).GetTypes().Where(x => x.Namespace.Contains("ViewModel") && !x.IsNested).ToList();
+
             foreach (var e in viewmodelList)
             {
                 services.AddTransient(e);

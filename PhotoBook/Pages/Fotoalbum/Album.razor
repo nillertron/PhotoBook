@@ -1,0 +1,68 @@
+﻿@page "/album/{photoalbumid:int}/{Token}"
+@inject Service.IFotoalbumService service
+@inject Service.IVideoService videoService
+@inject ITokenService tokenService
+@inject IJSRuntime Js
+@msg
+<div class="card-deck">
+    @foreach (var i in fotoListe)
+    {
+    <div class="col-xl-4 col-md-6 col-sm-12">
+        <div class="card h-100" style="">
+            <div class="card-body text-center" style="">
+                @if (i.GetType() == typeof(Model.PB_Foto))
+                    {
+                <img src="@i.Url" class="img-thumbnail" style="max-width:100%; height:auto; max-height:500px; cursor:pointer" @onclick="@(async () => await ImageToModal(i))" data-toggle="modal" data-target="#modal" />
+
+                    }
+                    else
+                    {
+                <video style="width:100%; height:auto; max-height:500px" controls>
+                    <source src="@i.Url" type="video/mp4" />
+
+                </video>
+                    }
+            </div>
+            <div class="card-footer" style="background-color:white">
+                @i.Beskrivelse
+
+            </div>
+        </div>
+    </div>
+    }
+</div>
+<PhotoBook.Shared.Modal><img class="d-block mx-auto" style="max-width:100%; height:auto; max-height:70vh" src="@((Selected!=null)?Selected.Url:"")"></PhotoBook.Shared.Modal>
+
+
+
+@code {
+    [Parameter]
+    public int PhotoAlbumId { get; set; }
+    [Parameter]
+    public string Token {get;set;}
+    private List<Model.IMedia> fotoListe = new List<Model.IMedia>();
+    private Model.IMedia Selected;
+    private string msg = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        if(!await tokenService.ConsumeToken(Token))
+        {
+            msg = "Not Authorized";
+            return;
+        }
+        var dbList = await service.GetFotoAlbum(PhotoAlbumId);
+        var videoList = await videoService.GetUserVideosFromFotoAlbumId(PhotoAlbumId);
+        fotoListe = new List<Model.IMedia>(dbList);
+        fotoListe.AddRange(videoList);
+        fotoListe = fotoListe.OrderByDescending(x => x.OprettetDato).ToList();
+
+    }
+    private async Task ImageToModal(Model.IMedia foto)
+    {
+        Selected = foto;
+        await Js.InvokeVoidAsync("ToggleModal");
+    }
+
+}

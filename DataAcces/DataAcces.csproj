@@ -7,6 +7,10 @@
   <ItemGroup>
     <Compile Remove="Migrations\20200808194041_first.cs" />
     <Compile Remove="Migrations\20200808194041_first.Designer.cs" />
+    <Compile Remove="Migrations\20200818194255_Video.cs" />
+    <Compile Remove="Migrations\20200818194255_Video.Designer.cs" />
+    <Compile Remove="Migrations\20200818195423_Video1.cs" />
+    <Compile Remove="Migrations\20200818195423_Video1.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

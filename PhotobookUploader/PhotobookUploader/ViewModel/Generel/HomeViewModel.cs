@@ -12,6 +12,10 @@ namespace PhotobookUploader.ViewModel
     public class HomeViewModel:BaseViewModel
     {
         public ICommand PicturePageCommand { get; private set; }
+        public ICommand VideoPageCommand { get; private set; }
+        public ICommand ManageFotoCommand { get; private set; }
+        public ICommand ManageVideoCommand { get; private set; }
+
         public ICommand CreatePhotoalbumCommand { get; private set; }
         public ICommand SettingsPageCommand { get; private set; }
         public ICommand LogoutCommand { get; private set; }
@@ -24,7 +28,26 @@ namespace PhotobookUploader.ViewModel
             CreatePhotoalbumCommand = new Command(async () => await PhotoAlbumPage());
             SettingsPageCommand = new Command(async () => await SettingsPage());
             LogoutCommand = new Command(async () => await LogOut());
+            VideoPageCommand = new Command(async () => await VideoPage());
+            ManageFotoCommand = new Command(async () => await ManageFotoPage());
+            ManageVideoCommand = new Command(async () => await ManageVideoPage());
 
+
+        }
+        private async Task ManageFotoPage()
+        {
+            var page = (Page)Container.GetService(typeof(FotoOverview));
+            await Navigation.Navigation.PushAsync(page);
+        }
+        private async Task ManageVideoPage()
+        {
+            var page = (Page)Container.GetService(typeof(VideoOverview));
+            await Navigation.Navigation.PushAsync(page);
+        }
+        private async Task VideoPage()
+        {
+            var page = (Page)Container.GetService(typeof(UploadVideo));
+            await Navigation.Navigation.PushAsync(page);
         }
         private async Task PhotoAlbumPage()
         {

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PhotobookUploader.View.VideoOverview">
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView x:Name="ListView"  ItemsSource="{Binding VideoListe}" RowHeight="100" SelectionMode="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid x:Name="Item">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+
+                                </Grid.ColumnDefinitions>
+                                <Label FontSize="16" TextColor="Black" HorizontalOptions="CenterAndExpand" Grid.ColumnSpan="2" Text="{Binding Beskrivelse}"></Label>
+                                <Button BindingContext="{Binding Source={x:Reference ListView},Path=BindingContext}" Command="{Binding EditCommand}" CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" Text="Edit" Grid.Row="1"></Button>
+                                <Button BindingContext="{Binding Source={x:Reference ListView}, Path=BindingContext}" Command="{Binding DeleteCommand}" CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" Text="Delete" Grid.Row="1" Grid.Column="1" BackgroundColor="IndianRed"></Button>
+                                </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

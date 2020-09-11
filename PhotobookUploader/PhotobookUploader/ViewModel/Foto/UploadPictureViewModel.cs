@@ -36,6 +36,8 @@ namespace PhotobookUploader.ViewModel
         public ImageSource ImgSource { get => _imgSource; set { _imgSource = value; Notify("ImgSource"); } }
         private MediaFile mediafile;
         private IFotoService service;
+        private bool _btnActive = true;
+        public bool BtnActive { get => _btnActive; set { _btnActive = value; Notify("BtnActive"); } }
         public UploadPictureViewModel(IServiceProvider container, IFotoService service, IFotoalbumService fotoalbumService, ILoginStateService loginState) : base(container)
         {
             this.service = service;
@@ -88,6 +90,8 @@ namespace PhotobookUploader.ViewModel
         }
         private async Task Upload()
         {
+
+            Msg = string.Empty;
             if(Beskrivelse == string.Empty)
             {
                 Msg = "Write a description";
@@ -105,17 +109,21 @@ namespace PhotobookUploader.ViewModel
             }
             try
             {
+                BtnActive = false;
                 var content = new MultipartFormDataContent();
                 content.Add(new StreamContent(mediafile.GetStream()), "\"file\"", $"\"{mediafile.Path}\"");
                 //bruger ikke content variablen, da det lykkedes med blot at bruge fil lokationen, da det virker med restsharp.
                 await service.UploadPhoto(Path,Beskrivelse, FotoalbumsListe[SelectedIndex].Id);
                 Msg = "Uploadet";
+                Beskrivelse = string.Empty;
+                ImgSource = null;
+
             }
             catch(Exception ex)
             {
                 Msg = ex.Message;
             }
-
+            BtnActive = true;
         }
         private async Task TakePhoto()
         {

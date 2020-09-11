@@ -21,12 +21,6 @@ namespace PhotoBook.API
             brugerService = bs;
             brugerrepo = repo;
         }
-        // GET: api/User
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
 
         // POST: api/User
         [HttpPost]
@@ -57,18 +51,31 @@ namespace PhotoBook.API
         [HttpGet("{id}")]
         public async Task<PB_Bruger> GetById(int id)
         {
-            var bruger = await brugerrepo.Get(id);
+            var bruger = await brugerrepo.GetBrugerFromIdInnerJoinFotos(id);
             if(bruger != null)
             {
                 bruger.Password = "";
             }
             return bruger;
         }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpPost("Edit")]
+        public async Task<string> Edit([FromBody] PB_Bruger user)
         {
+            try
+            {
+                var dbUser = await brugerrepo.Get(user.Id);
+                if (dbUser == null)
+                    throw new Exception("User not found");
+                dbUser.Navn = user.Navn;
+                dbUser.EfterNavn = user.EfterNavn;
+                dbUser.Password = user.Password;
+                await brugerrepo.Edit(dbUser);
+                return "Ok";
+            }
+            catch(Exception ex)
+            {
+                return ex.Message;
+            }
         }
     }
 }

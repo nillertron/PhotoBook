@@ -15,5 +15,7 @@ namespace DataAcces
         public DbSet<PB_Bruger> PB_Bruger { get; set; }
         public DbSet<PB_Foto> PB_Foto { get; set; }
         public DbSet<PB_Fotoalbum> PB_FotoAlbum { get; set; }
+        public DbSet<PB_Video> PB_Video { get; set; }
+        public DbSet<PB_Token> PB_Token { get; set; }
     }
 }

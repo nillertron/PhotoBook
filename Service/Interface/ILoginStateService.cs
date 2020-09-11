@@ -7,6 +7,7 @@ namespace Service
     {
         PB_Bruger user { get; }
 
+        Task EditUser(PB_Bruger model);
         Task GetUserFromId(int id);
         Task Login(string email, string password);
         Task Logout();

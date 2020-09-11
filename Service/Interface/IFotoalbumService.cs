@@ -10,5 +10,6 @@ namespace Service
         Task DeleteApi(PB_Fotoalbum model);
         Task<List<PB_Fotoalbum>> GetAllForUserApi(int userId);
         Task<PB_Fotoalbum> GetApi(int photoAlbumId);
+        Task<List<PB_Foto>> GetFotoAlbum(int id);
     }
 }

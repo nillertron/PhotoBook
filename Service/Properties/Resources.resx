@@ -118,6 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DefaultConnection" xml:space="preserve">
-    <value />
+    <value>datasource=mysql41.unoeuro.com;port=3306;username=nillertron_com;password=n1chl45ersej;database=nillertron_com_db;</value>
   </data>
 </root>

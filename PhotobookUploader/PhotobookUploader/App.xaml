@@ -8,10 +8,25 @@
 
     <Application.Resources>
         <ResourceDictionary>
-            <Style x:Key="Button" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="#E8831B"></Setter>
-                <Setter Property="CornerRadius" Value="-10"></Setter>
+
+        <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#222222"></Setter>
+            <Setter Property="CornerRadius" Value="10"></Setter>
+                <Setter Property="TextColor" Value="#ffffff"></Setter>
+        </Style>
+        <Style TargetType="NavigationPage">
+         <Setter Property="BackgroundColor" Value="#f0f0f7"></Setter>
+        </Style>
+        <Style TargetType="Page">
+                <Setter Property="BackgroundColor" Value="#f0f0f7"></Setter>
+        </Style>
+        <Style TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="#f0f0f7"></Setter>
+        </Style>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="DarkGray"></Setter>
             </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

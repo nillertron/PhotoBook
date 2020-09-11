@@ -36,6 +36,8 @@ namespace Service
             var modelList = Assembly.Load(nameof(Model)).GetTypes().Where(x => !x.IsNested && !x.Name.Contains("BaseEntity")).ToList();
             foreach (var e in modelList)
             {
+                if (e.Name == "IMedia")
+                    continue;
                 services.AddTransient(e);
             }
             return services;
@@ -56,6 +58,7 @@ namespace Service
 
         }
 
-        
+
+
     }
 }

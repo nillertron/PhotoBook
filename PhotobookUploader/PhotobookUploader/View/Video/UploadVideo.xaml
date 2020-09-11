@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PhotobookUploader.View.UploadVideo">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="CenterAndExpand">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button IsEnabled="{Binding BtnActive}" Text="Select in library" Command="{Binding SelectCommand}"></Button>
+                <Button IsEnabled="{Binding BtnActive}" Grid.Column="1" Text="Record video" Command="{Binding TakeVideoCommand}"></Button>
+            </Grid>
+
+            <Picker SelectedIndex="{Binding SelectedIndex}" ItemsSource="{Binding Category}" ItemDisplayBinding="{Binding Navn}"></Picker>
+            <Editor Text="{Binding Beskrivelse}"></Editor>
+            <Button IsEnabled="{Binding BtnActive}" BackgroundColor="DarkGreen" Text="Upload" Command="{Binding UploadCommand}"></Button>
+            <Label Text="{Binding VideoName}"></Label>
+           <Label Text="{Binding Msg}"></Label>
+        </StackLayout>
+        
+    </ContentPage.Content>
+</ContentPage>

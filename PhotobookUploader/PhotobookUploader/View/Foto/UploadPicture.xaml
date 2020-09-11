@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="PhotobookUploader.View.UploadPicture">
+    <ContentPage.Content>
+        
+        <StackLayout>
+            <Grid Padding="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.5*"></RowDefinition>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="3.5*"/>
+                    <RowDefinition Height="0.5*"/>
+
+                </Grid.RowDefinitions>
+                <Button IsEnabled="{Binding BtnActive}" Grid.Column="0" Text="Pick from library" Command="{Binding ChosePicCommand}"></Button>
+                <Button IsEnabled="{Binding BtnActive}" Grid.Column="1" Text="Take with camera" Command="{Binding TakePhotoCommand}"></Button>
+                <Picker Grid.Row="1" Grid.ColumnSpan="2" SelectedIndex="{Binding SelectedIndex}" ItemsSource="{Binding FotoalbumsListe}" ItemDisplayBinding="{Binding Navn}">
+                </Picker>
+                <Editor Grid.Row="2" Grid.ColumnSpan="2" Placeholder="Description" Text="{Binding Beskrivelse}"/>
+                <Image Grid.Row="3"  Grid.ColumnSpan="2" Source="{Binding ImgSource}"></Image>
+                <Button  IsEnabled="{Binding BtnActive}" Grid.Row="4" Grid.ColumnSpan="2" Text="Upload" BackgroundColor="DarkGreen" Command="{Binding UploadCommand}"></Button>
+            </Grid>
+            <Label Text="{Binding Msg}"></Label>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

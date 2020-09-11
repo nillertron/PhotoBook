@@ -28,7 +28,7 @@ namespace DataAcces
 
         public async Task Delete(T model)
         {
-            dbContext.Remove(model);
+            dbContext.Remove<T>(model);
             await dbContext.SaveChangesAsync();
         }
         public async Task<T> Get(int id)

@@ -17,6 +17,23 @@ namespace DataAcces.Specific
         public async Task<PB_Bruger> GetBrugerFromSharedId(string id)
         {
             var bruger = dbContext.PB_Bruger.Where(x => x.SharedId == id).Include(x => x.Fotoalbum).ThenInclude(x => x.Fotos).FirstOrDefault();
+            if (bruger == null)
+                return null;
+            foreach(var fa in bruger.Fotoalbum)
+            {
+                fa.Fotos = fa.Fotos.OrderByDescending(x => x.OprettetDato).ToList();
+            }
+            return bruger;
+        }
+        public async Task<PB_Bruger> GetBrugerFromIdInnerJoinFotos(int id)
+        {
+            var bruger = dbContext.PB_Bruger.Where(x => x.Id == id).Include(x => x.Fotoalbum).ThenInclude(x => x.Fotos).Include(x=>x.Fotoalbum).ThenInclude(x=>x.Videos).FirstOrDefault();
+            if (bruger == null)
+                return null;
+            foreach (var fa in bruger.Fotoalbum)
+            {
+                fa.Fotos = fa.Fotos.OrderByDescending(x => x.OprettetDato).ToList();
+            }
             return bruger;
         }
         public async Task<PB_Bruger> AttemptLogin(string email, string password)
@@ -44,5 +61,6 @@ namespace DataAcces.Specific
             }
             return succes;
         }
+
     }
 }

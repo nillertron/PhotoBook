@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="PhotobookUploader.View.Settings">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="{Binding Msg}"></Label>
+            <Entry IsReadOnly="True" Text="{Binding Current.Email}"></Entry>
+            <Entry IsReadOnly="True" Text="{Binding Current.SharedId}"></Entry>
+            <Entry Placeholder="First Name" Text="{Binding Current.Navn}"></Entry>
+            <Entry Placeholder="Last Name" Text="{Binding Current.EfterNavn}"></Entry>
+            <Entry IsPassword="True" Placeholder="Password" Text="{Binding Current.Password}"></Entry>
+            <Button Command="{Binding EditCommand}" Text="Save Changes"></Button>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

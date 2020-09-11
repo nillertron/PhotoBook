@@ -1,14 +1,41 @@
-﻿@page "/Fotoalbum/{sharedid}"
+﻿@page "/Fotoalbum/{sharedid}/{token}"
 @inject IBrugerService brugerService
+@inject ITokenService tokenService
+@inject NavigationManager nav
 <p class="text-danger">@msg</p>
+<div class="card-deck">
+    @foreach(var i in current.Fotoalbum)
+    {
+    <div class="col-xl-4 col-md-6 col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <p>@i.Navn</p>
+            </div>
+            <div class="card-body">
+                <p>@i.Beskrivelse</p>
+                <button @onclick="@(async () => await SwitchDisplayAlbum(i))" class="btn btn-primary" style="align-content:center">Open album</button>
+            </div>
+        </div>
+    </div>
+    }
+</div>
+
 @code {
     [Parameter]
     public string SharedId { get; set; }
+    [Parameter]
+    public string Token { get; set; }
     private Model.PB_Bruger current = new Model.PB_Bruger();
+    private List<Model.PB_Foto> fotoListe = new List<Model.PB_Foto>();
     private string msg = string.Empty;
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
+        if(!await tokenService.ConsumeToken(Token))
+        {
+            msg = "Not Authorized";
+            return;
+        }
         try
         {
             current = await brugerService.FindUserFromSharedId(SharedId);
@@ -18,5 +45,11 @@
         {
             msg = ex.Message;
         }
+    }
+    private async Task SwitchDisplayAlbum(Model.PB_Fotoalbum album)
+    {
+        fotoListe = album.Fotos;
+        nav.NavigateTo("/album/" + album.Id +"/" + Token);
+        StateHasChanged();
     }
 }
